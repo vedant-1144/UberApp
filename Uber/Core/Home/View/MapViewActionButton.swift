@@ -30,22 +30,22 @@ struct MapViewActionButton: View {
     
     func actionForState(_ state : MapViewState) {
         switch state {
-        case .noInput :
-            print("NO INPUT")
-        case .searchingForLocation :
-            mapState = .noInput
-        case .locationSelected :
-            mapState = .noInput
-            viewModel.selectedLocationCoordinate = nil
+            case .noInput :
+                print("NO INPUT")
+            case .searchingForLocation :
+                mapState = .noInput
+            case .locationSelected, .polylineAdded :
+                mapState = .noInput
+                viewModel.selectedUberLocation = nil
         }
     }
     
     func imageNameForState(_ state : MapViewState) -> String {
         switch state {
-        case .noInput :
-            return "line.3.horizontal"
-        case .searchingForLocation, .locationSelected :
-            return "arrow.left"
+            case .noInput :
+                return "line.3.horizontal"
+            case .searchingForLocation, .locationSelected, .polylineAdded :
+                return "arrow.left"
         }
     }
 }
